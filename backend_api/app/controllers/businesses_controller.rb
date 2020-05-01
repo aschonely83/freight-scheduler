@@ -13,7 +13,7 @@ class BusinessesController < ApplicationController
 
   # POST /businesses
   def create
-    business = Business.create(business_params)
+    business = Business.create(name: params[:name], pallets: params[:pallets], scheduled_day: params[:scheduled_day], confirmation_number: params[:confirmation_number])
     render  json: business, except: [:created_at, :updated_at]  
   end
 
@@ -30,8 +30,9 @@ class BusinessesController < ApplicationController
   def destroy
     business.destroy
   end
-
-  def business_params
-    params.require(:businesses).permit( :name, :pallets, :scheduled_day, :confirmation_number)
-  end
+  
+  #private
+  #def business_params
+   # params.require(:business).permit( :name, :pallets, :scheduled_day, :confirmation_number)
+  #end
 end

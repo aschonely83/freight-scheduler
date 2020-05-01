@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 2020_04_30_175416) do
     t.string "name"
     t.string "email"
     t.string "confirmation_number"
-    t.integer "schedule_id"
     t.integer "business_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

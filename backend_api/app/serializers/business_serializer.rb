@@ -1,4 +1,5 @@
 class BusinessSerializer
   include FastJsonapi::ObjectSerializer
-  attributes 
+  attributes :name, :pallets, :scheduled_day, :confirmation_number
+  has_many :carriers
 end

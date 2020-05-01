@@ -12,7 +12,7 @@ class BusinessesController < ApplicationController
   end
 
   # POST /businesses
-  def created
+  def create
     business = Business.create(business_params)
     render  json: business, except: [:created_at, :updated_at]  
   end

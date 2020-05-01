@@ -14,9 +14,9 @@ ActiveRecord::Schema.define(version: 2020_04_30_175416) do
 
   create_table "businesses", force: :cascade do |t|
     t.string "name"
-    t.string "pallets"
+    t.integer "pallets"
     t.string "scheduled_day"
-    t.string "confirmation_number"
+    t.integer "confirmation_number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2020_04_30_175416) do
   create_table "carriers", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.string "confirmation_number"
+    t.integer "confirmation_number"
     t.integer "business_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

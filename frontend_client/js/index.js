@@ -1,9 +1,6 @@
 BUSINESSES_URL = 'http://localhost:3000/businesses'
 
-const addButton = document.createElement('button')
-addButton.innerText = "Add Business"
-document.body.appendChild(addButton)
-addButton.addEventListener('click', addBusiness)
+
 
 fetch(BUSINESSES_URL)
 .then(resp => resp.json())

@@ -13,7 +13,7 @@ class BusinessesController < ApplicationController
 
   # POST /businesses
   def create
-    business = Business.create(name: params[:name], pallets: params[:pallets], scheduled_day: params[:scheduled_day], confirmation_number: params[:confirmation_number])
+    business = Business.create(name: Faker::Name.name, pallets: Faker::Number.number(digits: 2), scheduled_day: Faker::Date.forward(days: 3), confirmation_number: Faker::Number.number(digits: 6))
     render  json: business, except: [:created_at, :updated_at]  
   end
 

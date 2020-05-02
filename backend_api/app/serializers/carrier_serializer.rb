@@ -1,4 +1,5 @@
 class CarrierSerializer
   include FastJsonapi::ObjectSerializer
-  attributes 
+  attributes :name, :email, :confirmation_number, :business_id
+  belongs_to :businesses 
 end

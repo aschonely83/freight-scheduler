@@ -1,3 +1,3 @@
 class Business < ApplicationRecord
-    has_many :carriers
+    has_many :carriers, :dependent => :delete_all
 end

@@ -15,3 +15,12 @@ require 'faker'
     confirmation_number: Faker::Number.number(digits: 6)
   )
 end
+
+10.times do
+  Carrier.create(
+    name: Faker::Name.name,
+    email: Faker::Internet.email,
+    confirmation_number: Faker::Number.number(digits: 6),
+    business_id: Faker::Number.decimal_part(digits: 2)
+  )
+end

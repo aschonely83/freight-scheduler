@@ -1,4 +1,6 @@
 class BusinessesController < ApplicationController
+  before_action :set_event, only: [:show, :update, :destroy]
+
   #GET /businesses
     def index
     businesses = Business.all 
@@ -13,7 +15,7 @@ class BusinessesController < ApplicationController
 
   # POST /businesses
   def create
-    business = Business.create(name: Faker::Name.name, pallets: Faker::Number.number(digits: 2), scheduled_day: Faker::Date.forward(days: 3), confirmation_number: Faker::Number.number(digits: 6))
+    business = Business.create(business_params)
     render  json: business, except: [:created_at, :updated_at]  
   end
 
@@ -31,8 +33,13 @@ class BusinessesController < ApplicationController
     business.destroy
   end
   
-  #private
-  #def business_params
-   # params.require(:business).permit( :name, :pallets, :scheduled_day, :confirmation_number)
-  #end
+  private
+  def set_business
+    business = Business.find(params[:id])
+  end
+
+  def business_params
+    params.require(:business).permit( :name, :pallets, :scheduled_day, :confirmation_number)
+  end
 end
+

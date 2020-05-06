@@ -17,28 +17,28 @@
   )
 
   Business.create(
-    name: "Azalee Keebler",
+    name: "Glenda Hopkins",
     pallets: 11,
     scheduled_day: "2020-05-07",
     confirmation_number: 2
   )
 
   Business.create(
-    name: "Azalee Keebler",
+    name: "Anabelle Friskers",
     pallets: 12,
     scheduled_day: "2020-05-07",
     confirmation_number: 3
   )
 
   Business.create(
-    name: "Azalee Keebler",
+    name: "Heidi Baggabon",
     pallets: 13,
     scheduled_day: "2020-05-08",
     confirmation_number: 4
   )
 
   Business.create(
-    name: "Azalee Keebler",
+    name: "Sandra Dee",
     pallets: 14,
     scheduled_day: "2020-05-08",
     confirmation_number: 5

@@ -7,6 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 
+Business.destroy_all
+Carrier.destroy_all
+
 10.times do
   Business.create(
     name: Faker::Name.name,

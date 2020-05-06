@@ -5,25 +5,76 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-require 'faker'
 
-Business.destroy_all
-Carrier.destroy_all
 
-10.times do
+
+
   Business.create(
-    name: Faker::Name.name,
-    pallets: Faker::Number.number(digits: 2),
-    scheduled_day: Faker::Date.forward(days: 3),
-    confirmation_number: Faker::Number.number(digits: 6)
+    name: "Azalee Keebler",
+    pallets: 10,
+    scheduled_day: "2020-05-07",
+    confirmation_number: 1
   )
-end
 
-10.times do
-  Carrier.create(
-    name: Faker::Name.name,
-    email: Faker::Internet.email,
-    confirmation_number: Faker::Number.number(digits: 6),
-    business_id: Faker::Number.decimal_part(digits: 2)
+  Business.create(
+    name: "Azalee Keebler",
+    pallets: 11,
+    scheduled_day: "2020-05-07",
+    confirmation_number: 2
   )
-end
+
+  Business.create(
+    name: "Azalee Keebler",
+    pallets: 12,
+    scheduled_day: "2020-05-07",
+    confirmation_number: 3
+  )
+
+  Business.create(
+    name: "Azalee Keebler",
+    pallets: 13,
+    scheduled_day: "2020-05-08",
+    confirmation_number: 4
+  )
+
+  Business.create(
+    name: "Azalee Keebler",
+    pallets: 14,
+    scheduled_day: "2020-05-08",
+    confirmation_number: 5
+  )
+
+  Carrier.create(
+    name:"Elliott Daniel",
+    email: "brandee@hermankoepp.biz",
+    confirmation_number: 10 ,
+    business_id: 1
+  )
+
+  Carrier.create(
+    name:"John Franks",
+    email: "johnf@hermankoepp.biz",
+    confirmation_number: 11 ,
+    business_id: 2
+  )
+
+  Carrier.create(
+    name:"Brendan Kelly",
+    email: "bk@hermankoepp.biz",
+    confirmation_number: 12 ,
+    business_id: 3
+  )
+
+  Carrier.create(
+    name:"Mike Black",
+    email: "mikeb@hermankoepp.biz",
+    confirmation_number: 13 ,
+    business_id: 4
+  )
+
+  Carrier.create(
+    name:"Fred Marks",
+    email: "fmarks@hermankoepp.biz",
+    confirmation_number: 14 ,
+    business_id: 5
+  )

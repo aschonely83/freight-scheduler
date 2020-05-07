@@ -4,7 +4,6 @@ class Carrier {
         this.name = name,
         this.email = email,
         this.confirmation_number = confirmation_number,
-        this.business_id = business_id,
-        AppContainer.carriers.push(this);
+        this.business_id = business_id
     }
 }

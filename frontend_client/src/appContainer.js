@@ -4,25 +4,26 @@ class AppContainer  {
     url = "http://localhost:3000";
       
    
-    bindEventListeners() {
-      const btn = document.getElementById("addBusiness")
-      btn.addEventListener("click", this.addBusiness);
+     //bindEventListeners() {
+     // document.getElementById("create-business-form").addEventListener("click", this.createBusiness);
+      
      
-      const dlb = document.getElementById("deleteBusiness")
-      dlb.addEventListener("click", this.deleteBusiness);
+      //const dlb = document.getElementById("deleteBusiness")
+      //dlb.addEventListener("click", this.deleteBusiness);
+     //};
      
-    };
-
-    // fetch request
+     // fetch request
     getBusinesses() {
         fetch(this.url + '/businesses')
         .then(resp => resp.json())
-        .then(data => {
-          data.forEach(business => {
-            new Business(business.id, business.name, business.pallets, 
-              business.scheduled_day, business.confirmation_number, business.carriers)
+        .then(businesses => {
+         
+          businesses.data.forEach(business => { 
+            const newBusiness = new Business(business.id, business.attributes.name, business.attributes.pallets, 
+              business.attributes.scheduled_day, business.attributes.confirmation_number, business.attributes.carriers)
+              this.renderBusinesses();                   
           });
-          this.renderBusinesses(); 
+          
         })
         .catch(err => alert(err));  
     };
@@ -46,37 +47,45 @@ class AppContainer  {
         div1.append(p1)
         div1.append(p2)
         div1.append(p3)
+        
                         
         div.setAttribute('class', "card")
         div.setAttribute('id', "card")
         div1.setAttribute('class',"card-body")
         p.setAttribute('class', "business-name")
-        p.innerHTML = business.name,  
+        p.textContent =  business.name,  
         p1.setAttribute('class', "business-pallets")
-        p1.innerHTML = business.pallets;
+        p1.textContent = business.pallets;
         p2.setAttribute('class', "business-sched-day")
-        p2.innerHTML = business.scheduled_day;
+        p2.textContent = business.scheduled_day;
         p3.setAttribute('class', "business-confirm-number")
-        p3.innerHTML = business.confirmation_number;
-                        
-      })
-      document.getElementById('add-business-form').appendChild(div) 
-    };
-
-    addBusiness() {
-
-    }
-   
-    deleteBusiness() { 
-      businesses.forEach(business => {
-        fetch(`http://localhost:3000/businesses/${business.id}`, {
-          method: 'DELETE',
-          header: 'application/json'
-        })
-        .then(resp => console.log(resp))
-        
+        p3.textContent = business.confirmation_number;
+                              
       })
       
+      document.body.append(div) 
     };
 
-}
+    //createBusiness() {
+    //  const options = {  
+    //  method: "POST",
+    //  headers: {
+    //      "Content-Type": "application/json",
+    //      "Accept": "application/json",
+    //  body: JSON.stringify({
+    //    name: name.value,
+    //    pallets: pallets.value,
+    //    scheduled_day: scheduled_day.value,
+    //    confirmation_number: confirmation_number.value
+    //      })
+    //   }
+    //  }  
+    //  fetch('http://localhost:3000/businesses',options)
+    //     
+    //    .then(resp => resp.json())
+    //    .then(data => console.log(data))
+    //    
+    //    .catch(err => alert(err))       
+    //  }
+
+  }

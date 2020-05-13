@@ -11,23 +11,38 @@
   </header>
   
   
-    <div class="add-business">
-      <form id="add-business-form">
-        <h2>Add a Business</h2><br>
+    <div class="container">
+      <form id="create-business-form">
+        <h3>Add a Business</h3>
           <div>
             <input type="text" id="name" placeholder="Name"/><br>
             <input type="text" id="pallets" placeholder="Pallets"/><br>
             <input type="text" id="scheduled_day" placeholder="Scheduled Day"/><br>
             <input type="text" id="confirmation_number" placeholder="Confirmation Number"/><br><br>
             <button type="submit" id="addBusiness">Add Business</button><br><br>
-            <button type="button" id="deleteBusiness">Delete Business</button>
+            
           </div>
       </form>
     </div>
+
+    <div class="container">
+      <form id="create-carrier-form">
+        <h3>Add a Carrier</h3>
+          <div>
+            <input type="text" id="name" placeholder="Name"/><br>
+            <input type="text" id="email" placeholder="Email"/><br>
+            <input type="text" id="confirm_number" placeholder="Confirmation Number"/><br><br>
+            <button type="submit" id="addCarrier">Add Carrier</button><br><br>
+            
+          </div>
+      </form>
+    </div>
+    <div class="allBusiness-Container"></div>
+    <div class="allCarriers-Container"></div>
  
 </body>
 <script src="./src/carrier.js"></script>
-  <script src="./src/business.js"></script>
-  <script src="./src/appContainer.js"></script>
-  <script src="./src/index.js"></script>
+<script src="./src/business.js"></script>
+<script src="./src/appContainer.js"></script>
+<script src="./src/index.js"></script> 
 </html>

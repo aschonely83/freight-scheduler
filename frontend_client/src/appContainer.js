@@ -4,13 +4,13 @@ class AppContainer  {
     url = "http://localhost:3000";
       
    
-     //bindEventListeners() {
-     // document.getElementById("create-business-form").addEventListener("click", this.createBusiness);
-      
-     
-      //const dlb = document.getElementById("deleteBusiness")
-      //dlb.addEventListener("click", this.deleteBusiness);
-     //};
+     bindEventListeners() { 
+       const newBusinessForm = document.getElementById("createBusinessForm")
+       newBusinessForm.addEventListener("submit", this.createBusiness.bind(this));
+         
+    // const dlb = document.getElementById("deleteBusiness")
+     // dlb.addEventListener("click", this.deleteBusiness);
+     };
      
      // fetch request
     getBusinesses() {
@@ -66,26 +66,30 @@ class AppContainer  {
       document.body.append(div) 
     };
 
-    //createBusiness() {
-    //  const options = {  
-    //  method: "POST",
-    //  headers: {
-    //      "Content-Type": "application/json",
-    //      "Accept": "application/json",
-    //  body: JSON.stringify({
-    //    name: name.value,
-    //    pallets: pallets.value,
-    //    scheduled_day: scheduled_day.value,
-    //    confirmation_number: confirmation_number.value
-    //      })
-    //   }
-    //  }  
-    //  fetch('http://localhost:3000/businesses',options)
-    //     
-    //    .then(resp => resp.json())
-    //    .then(data => console.log(data))
-    //    
-    //    .catch(err => alert(err))       
-    //  }
-
-  }
+    
+        
+    createBusiness(event) {
+      event.preventDefault();
+      const form = event.target;
+      fetch(`${this.url}/businesses`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: form.name.value,
+          pallets: form.pallets.value,
+          scheduled_day: form.scheduledDay.value,
+          confirmation_number: form.confirmationNumber.value
+        })
+      })
+      .then(resp => resp.json())
+      .then(data => data )
+      .catch(err => alert(err));
+    }
+  
+  
+    
+  
+}    

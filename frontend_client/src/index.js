@@ -1,3 +1,4 @@
 const app = new AppContainer();
 app.getBusinesses();
-app.renderBusinessesForm();
+app.renderBusinesses();
+app.bindEventListeners();

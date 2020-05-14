@@ -19,17 +19,17 @@ class BusinessesController < ApplicationController
     end
   end
 
-  #def destroy
-  #  business = Business.find(params[:id])
-  #  if business.destroy
-  #  render json: => {message: "Business Deleted"}
-  #  end
-  #end
+  def destroy
+    business = Business.find(params[:id])
+    if business.destroy
+      render json: {message: "Business Deleted"}
+    end
+  end
 
   private
 
   def business_params
-    params.require(:business).permit(:name, :pallets, :scheduled_day, :confirmation_number)
+    params.permit(:name, :pallets, :scheduled_day, :confirmation_number)
   end
 
 end     

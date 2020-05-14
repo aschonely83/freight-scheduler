@@ -1,25 +1,24 @@
 class CarriersController < ApplicationController
-  def index
-    carriers = Carrier.all
-    render json: CarrierSerializer.new(carriers)
-  end
-
+  
   def show
     carrier = Carrier.find_by(id: params[:id])
     render json: CarrierSerializer.new(carrier)
   end
   
   def create
-    carrier = Carrier.new(carrier_params)
-    if carrier.save
-      render json: CarrierSerializer.new(carrier)
-    end        
+    if params[:business_id]
+      business = Business.find(params[:business_id])
+      carrier = business.carriers.build(carrier_params)
+      if carrier.save
+        render json: CarrierSerializer.new(carrier)
+      end        
+    end
   end
 
   private
 
   def carrier_params
-    params.require(:carrier).permit(:name, :email, :confirmation_number, :business_id)
+    params.permit(:name, :email, :confirmation_number, :business_id)
   end
 
 end

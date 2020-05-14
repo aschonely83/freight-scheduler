@@ -13,8 +13,23 @@ class BusinessesController < ApplicationController
   
    #create /businesses
   def create
-    business = Business.create(name: params[:name], pallets: params[:pallets], scheduled_day: params[:scheduled_day], 
-    confirmation_number: params[:confirmation_number])
-    render json: business, status: 200
-  end 
+    business = Business.create(business_params)
+    if business.save
+    render json: BusinessSerializer.new(business).serialized_json
+    end
+  end
+
+  #def destroy
+  #  business = Business.find(params[:id])
+  #  if business.destroy
+  #  render json: => {message: "Business Deleted"}
+  #  end
+  #end
+
+  private
+
+  def business_params
+    params.require(:business).permit(:name, :pallets, :scheduled_day, :confirmation_number)
+  end
+
 end     

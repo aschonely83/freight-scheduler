@@ -19,24 +19,18 @@
             <input type="text" id="pallets" placeholder="Pallets"/><br>
             <input type="text" id="scheduledDay" placeholder="Scheduled Day"/><br>
             <input type="text" id="confirmationNumber" placeholder="Confirmation Number"/><br><br>
-            <button type="submit" id="addBusiness">Add Business</button><br><br>
-            <button type="submit" id="deleteBusiness">Delete Business</button>
+            <button type="submit" id="addBusiness">Add Business</button>
           </div>
+      </form>
+      <form id="carrierForm" style="display: none;">
+        <input id="name" type="text" class="name" name="name">
+        <input type="email" id="email" name="email">
+        <input type="text" id="confirmation-number" name="confirmationnumber">
+        <button type="submit">Add</button>
       </form>
     </div>
 
-    <div class="container">
-      <form id="create-carrier-form">
-        <h3>Add a Carrier</h3>
-          <div>
-            <input type="text" id="name" placeholder="Name"/><br>
-            <input type="text" id="email" placeholder="Email"/><br>
-            <input type="text" id="confirm_number" placeholder="Confirmation Number"/><br><br>
-            <button type="submit" id="addCarrier">Add Carrier</button><br><br>
-            
-          </div>
-      </form>
-    </div>
+   
     <div class="allBusiness-Container"></div>
     <div class="allCarriers-Container"></div>
  

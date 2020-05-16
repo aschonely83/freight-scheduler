@@ -1,4 +1,5 @@
 const app = new AppContainer();
-app.getBusinesses();
 app.renderBusinesses();
-app.bindEventListeners();
+setTimeout(() => {
+    app.bindEventListeners();
+}, 3000)      

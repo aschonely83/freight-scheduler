@@ -30,11 +30,7 @@ class AppContainer  {
           this.createCarriers(addCarrierButton.parentElement.dataset.id, e)
         }) 
        
-       //const addCarrierButton = document.getElementById("addCarrier")
-       //addCarrierButton.addEventListener("click", this.createCarrierFields.bind(this));
-
-       //const dlb = document.getElementById("deleteBusiness")
-       //dlb.addEventListener("click", this.deleteBusiness);
+      
      };
      
      // fetch request
@@ -65,7 +61,7 @@ class AppContainer  {
       const deleteBusiness = document.createElement('button')
       const addCarrier = document.createElement('button')
       const main = document.createElement('main')
-     // const carrForm =  
+      
       
       
       

@@ -1,10 +1,18 @@
 class CarriersController < ApplicationController
   
+  # GET carriers
+  def index
+    carriers = Carrier.all
+    render json: CarrierSerializer.new(carriers)
+  end
+  
+
   def show
     carrier = Carrier.find_by(id: params[:id])
     render json: CarrierSerializer.new(carrier)
   end
   
+  # POST Create
   def create
     if params[:business_id]
       business = Business.find(params[:business_id])

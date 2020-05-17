@@ -1,6 +1,7 @@
 class AppContainer  {
     constructor() {
       this.newBusinessForm = document.getElementById("createBusinessForm")
+      
     }
     static businesses = [];
     static carriers = [];
@@ -18,26 +19,30 @@ class AppContainer  {
              deleteButton.parentElement.remove()
          }
      })
-        const carrierForms = document.querySelectorAll(".carrier-form")
-        // carrierForm.addEventListener('submit', e => {
-        //   const addCarrierButton = document.getElementById("addCarrier")
-        //   e.preventDefault()
-         
-        //   this.createCarriers(addCarrierButton.parentElement.dataset.id, e)
-        // }) 
-
+     const carrierForms = document.querySelectorAll(".carrier-form")
+        
         const addCarrierBtns = document.querySelectorAll("button.addCarrier")
         
         for(let x = 0; x < addCarrierBtns.length; x++) {
-          // debugger
+        
           addCarrierBtns[x].addEventListener("click", () => {
             
-            carrierForms[x].style.display = "block"
+            let cForm = carrierForms[x] 
+            cForm.style.display = "block"
+
+            cForm.addEventListener("submit", e => {
+              e.preventDefault();
+
+              this.createCarriers(cForm.parentElement.dataset.id, e) 
+            } )
           })
-        }
-     };
+           
+         }
+    }
+        
+       
      
-     // fetch request
+     //GET fetch request for businesses
     getBusinesses() {
         return fetch(this.url + '/businesses')
         .then(resp => resp.json())
@@ -82,7 +87,8 @@ class AppContainer  {
             confirmInput.placeholder = "Enter Confirmation Number"
             const submitBtn = document.createElement('button')
             submitBtn.type = "submit"
-            submitBtn.textContent = "Add Carrier"
+            submitBtn.classList.add("add")
+            submitBtn.textContent = "Add"
             carrForm.append(nameInput, emailInput, confirmInput, submitBtn)
             carrForm.style.display = "none"
             
@@ -114,7 +120,7 @@ class AppContainer  {
     };
 
     
-    // POST request to create a new business    
+    //POST request to create a new business    
     createBusiness(event) {
       event.preventDefault();
       const form = event.target;
@@ -137,16 +143,60 @@ class AppContainer  {
       .catch(err => alert(err));
     }
 
-    // DELETE request for deleting a business
+    //DELETE request for deleting a business
     destroyBusiness(id) {
       fetch(`${this.url}/businesses/${id}`, {
         method: "DELETE"
        })
        .then(location.reload())
     }
+   
+    //GET for carriers 
+   getCarriers(id) {
+     return fetch(`${this.url}/businesses/${id}/carriers`)
+       .then(resp => resp.json())
+       .then(data => data)
+       .catch(err => alert(err));
+   }
+
+   rednerCarriers(){ 
+   ////create DOM nodes and insert data into them to render in the DOM
+    
+
+          const main = document.createElement('main')
+
+
+          carriers.data.forEach(carrier => {
+            const div = document.createElement('div')
+            const div1 = document.createElement('div')
+            const p = document.createElement('p')
+            const p1 = document.createElement('p')
+            const p2 = document.createElement('p')
+            
   
-   // POST request for creating a new business 
+            div.setAttribute('class', "card")
+            div.setAttribute('data-id', `${carrier.id}`)
+            div1.setAttribute('class',"card-body")
+            p.setAttribute('class', "carrier-name")
+            p.textContent =  carrier.attributes.name,  
+            p1.setAttribute('class', "carrier-email")
+            p1.textContent = carrier.attributes.email;
+            p2.setAttribute('class', "carrier-confirm-number")
+            p2.textContent = carrier.attributes.confirmation_number;
+          
+            
+            div1.append(p, p1, p2)
+            div.append(div1)
+            main.append(div) 
+            
+          }) 
+            document.body.append(main)  
+        }
+
+
+   //POST request for creating a new carrier 
    createCarriers(id, e) {
+     const form = e.target;
      fetch(`${this.url}/businesses/${id}/carriers`, {
        method: "POST",
        headers: {
@@ -154,9 +204,9 @@ class AppContainer  {
          "Accept": 'application/json'
        },
        body: JSON.stringify({
-         name: e.target.name.value,
-         email: e.target.email.value,
-         confirmation_number: e.target.confirmationnumber.value
+         name: form.name_input.value,
+         email: form.email_input.value,
+         confirmation_number: form.con_number.value
        })
      })
      .then(resp => resp.json())

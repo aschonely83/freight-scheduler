@@ -104,11 +104,11 @@ class AppContainer  {
             p.setAttribute('class', "business-name")
             p.textContent =  business.attributes.name,  
             p1.setAttribute('class', "business-pallets")
-            p1.textContent = business.attributes.pallets;
+            p1.textContent = `# of Pallets: ${business.attributes.pallets}`;
             p2.setAttribute('class', "business-sched-day")
-            p2.textContent = business.attributes.scheduled_day;
+            p2.textContent =`Date: ${business.attributes.scheduled_day}`;
             p3.setAttribute('class', "confirm-number")
-            p3.textContent = business.attributes.confirmation_number;
+            p3.textContent = `Confirmation #: ${business.attributes.confirmation_number}`;
             //deleteBusiness.setAttribute('class', "deleteBusiness")
             //deleteBusiness.textContent = 'Delete Business'
             addCarrier.setAttribute('class', "addCarrier")

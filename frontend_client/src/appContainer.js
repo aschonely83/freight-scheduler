@@ -6,19 +6,20 @@ class AppContainer  {
     static businesses = [];
     static carriers = [];
     url = "http://localhost:3000";
+    static appointment = {}
       
    
      // event listeners for click and submit events    
      bindEventListeners() { 
-       this.newBusinessForm.addEventListener("submit", this.createBusiness.bind(this))
+       this.newBusinessForm.addEventListener("submit", this.createBusiness.bind(this));
 
-       document.addEventListener('click', e => {
-        const deleteButton = document.getElementById("deleteBusiness")
-         if (e.target == deleteButton) {
-             this.destroyBusiness(deleteButton.parentElement.dataset.id)
-             deleteButton.parentElement.remove()
-         }
-     })
+       //document.addEventListener("click", e => {
+       //          const deleteButton = document.querySelectorAll("button.deleteBusiness")
+       //  if (e.target == deleteButton) {
+       //      this.destroyBusiness(deleteButton.parentElement.dataset.id)
+       //      deleteButton.parentElement.remove()
+       //  }
+       //})
      const carrierForms = document.querySelectorAll(".carrier-form")
         
         const addCarrierBtns = document.querySelectorAll("button.addCarrier")
@@ -54,10 +55,8 @@ class AppContainer  {
       this.getBusinesses()
         .then(businesses => {
           
-          const main = document.createElement('main')
-
           businesses.data.forEach(business => {
-            
+          
             const div = document.createElement('div')
             const div1 = document.createElement('div')
             const p = document.createElement('p')
@@ -65,8 +64,9 @@ class AppContainer  {
             const p2 = document.createElement('p')
             const p3 = document.createElement('p')
               
-            const deleteBusiness = document.createElement('button')
+            //const deleteBusiness = document.createElement('button')
             const addCarrier = document.createElement('button')
+
 
             const carrForm = document.createElement('form')
             carrForm.classList.add("carrier-form")
@@ -91,7 +91,13 @@ class AppContainer  {
             submitBtn.textContent = "Add"
             carrForm.append(nameInput, emailInput, confirmInput, submitBtn)
             carrForm.style.display = "none"
-            
+
+            const main = document.querySelector('main');
+            main.append(div) 
+            div1.append(p, p1, p2, p3)
+            div.append(div1, addCarrier, carrForm)
+
+
             div.setAttribute('class', "card")
             div.setAttribute('data-id', `${business.id}`)
             div1.setAttribute('class',"card-body")
@@ -101,23 +107,17 @@ class AppContainer  {
             p1.textContent = business.attributes.pallets;
             p2.setAttribute('class', "business-sched-day")
             p2.textContent = business.attributes.scheduled_day;
-            p3.setAttribute('class', "business-confirm-number")
+            p3.setAttribute('class', "confirm-number")
             p3.textContent = business.attributes.confirmation_number;
-            deleteBusiness.setAttribute('class', "deleteBusiness")
-            deleteBusiness.textContent = 'Delete Business'
+            //deleteBusiness.setAttribute('class', "deleteBusiness")
+            //deleteBusiness.textContent = 'Delete Business'
             addCarrier.setAttribute('class', "addCarrier")
             addCarrier.textContent = 'Add Carrier'
-            
-            div1.append(p, p1, p2, p3)
-            div.append(div1, deleteBusiness, addCarrier, carrForm)
-            main.append(div)
-            
+
           })
-          document.body.append(main) 
+           
         })
-      
-      
-    };
+      };
 
     
     //POST request to create a new business    
@@ -139,59 +139,61 @@ class AppContainer  {
       })
       .then(resp => resp.json())
       .then(data => data )
-      .then(location.reload())
-      .catch(err => alert(err));
-    }
+      .then(location.reload());
+      }
 
     //DELETE request for deleting a business
-    destroyBusiness(id) {
-      fetch(`${this.url}/businesses/${id}`, {
-        method: "DELETE"
-       })
-       .then(location.reload())
-    }
+    //destroyBusiness(id) {
+    //  fetch(`${this.url}/businesses/${id}`, {
+    //    method: "DELETE"
+    //   })
+    //   .then(location.reload())
+    //}
    
     //GET for carriers 
    getCarriers(id) {
-     return fetch(`${this.url}/businesses/${id}/carriers`)
+      return fetch(`${this.url}/businesses/${id}/carriers`)
        .then(resp => resp.json())
-       .then(data => data)
        .catch(err => alert(err));
    }
 
    rednerCarriers(){ 
    ////create DOM nodes and insert data into them to render in the DOM
-    
+     this.getCarriers()
+       .then(carriers => {
 
-          const main = document.createElement('main')
+        carriers.data.forEach(carrier => {
+         
+        const div = document.createElement('div')
+        const div1 = document.createElement('div')
+        const p = document.createElement('p')
+        const p1 = document.createElement('p')
+        const p2 = document.createElement('p') 
 
 
-          carriers.data.forEach(carrier => {
-            const div = document.createElement('div')
-            const div1 = document.createElement('div')
-            const p = document.createElement('p')
-            const p1 = document.createElement('p')
-            const p2 = document.createElement('p')
-            
-  
-            div.setAttribute('class', "card")
-            div.setAttribute('data-id', `${carrier.id}`)
-            div1.setAttribute('class',"card-body")
-            p.setAttribute('class', "carrier-name")
-            p.textContent =  carrier.attributes.name,  
-            p1.setAttribute('class', "carrier-email")
-            p1.textContent = carrier.attributes.email;
-            p2.setAttribute('class', "carrier-confirm-number")
-            p2.textContent = carrier.attributes.confirmation_number;
+        const main = document.querySelector('main');
+        main.append(div)
+        div.append(div1)
+        div1.append(p, p1,p2)
+       
+
+        div.setAttribute('class', "carrier-card")
+        div.setAttribute('data-id', `${carrier.id}`)
+        div1.setAttribute('class', "carrier-card-body")
+        p.setAttribute('class', "carrier-name")
+        p.textContent = carrier.attributes.name
+        p1.setAttribute('class', "carrier-email")
+        p1.textContent = carrier.attributes.email
+        p2.setAttribute('class', "confirm-number")
+        p2.textContent = carrier.attributes.confirmation_number  
           
-            
-            div1.append(p, p1, p2)
-            div.append(div1)
-            main.append(div) 
-            
-          }) 
-            document.body.append(main)  
-        }
+
+         }) 
+        
+       }); 
+
+         
+    }
 
 
    //POST request for creating a new carrier 

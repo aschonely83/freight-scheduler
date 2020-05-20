@@ -43,31 +43,31 @@ Business.create(
 Carrier.create(
  name:"Elliott Daniel",
  email: "brandee@hermankoepp.biz",
- confirmation_number: 10 ,
+ confirmation_number: 1,
  business_id: 1
 )
 Carrier.create(
  name:"John Franks",
  email: "johnf@hermankoepp.biz",
- confirmation_number: 11 ,
+ confirmation_number: 2,
  business_id: 2
 )
 Carrier.create(
  name:"Brendan Kelly",
  email: "bk@hermankoepp.biz",
- confirmation_number: 12 ,
+ confirmation_number: 3,
  business_id: 3
 )
 Carrier.create(
  name:"Mike Black",
  email: "mikeb@hermankoepp.biz",
- confirmation_number: 13 ,
+ confirmation_number: 4,
  business_id: 4
 )
 Carrier.create(
  name:"Fred Marks",
  email: "fmarks@hermankoepp.biz",
- confirmation_number: 14 ,
+ confirmation_number: 5,
  business_id: 5
 )
 

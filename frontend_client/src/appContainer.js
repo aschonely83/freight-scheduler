@@ -181,11 +181,11 @@ class AppContainer  {
         div.setAttribute('data-id', `${carrier.id}`)
         div1.setAttribute('class', "carrier-card-body")
         p.setAttribute('class', "carrier-name")
-        p.textContent = carrier.attributes.name
+        p.textContent = `Name: ${carrier.attributes.name}`
         p1.setAttribute('class', "carrier-email")
-        p1.textContent = carrier.attributes.email
+        p1.textContent = `Email: ${carrier.attributes.email}`
         p2.setAttribute('class', "confirm-number")
-        p2.textContent = carrier.attributes.confirmation_number  
+        p2.textContent = `Confirmation #: ${carrier.attributes.confirmation_number}`
           
 
          }) 

@@ -101,7 +101,45 @@ button.addCarrier {
     letter-spacing: 2px;
 }
 
+#name-input,
+#email-input,
+#con-input {
+    border: 1px solid #c7c7c7;
+    margin: 0 auto;
+    padding-bottom: 10px;
+    text-align: center;
+    padding-right: 10px;
+    
+}
+
+button.add {
+    letter-spacing: 2px;
+    background-color: #040a24;
+    color: #fff;
+    border: 0;
+    border-radius: 2px;
+    cursor: pointer;
+    width: 75%;
+    height: 35px;
+}
+
 .carrier-card {
-    /* text-align: center; */
-    display: none;
-}  
+    width: 375px;
+    border: 1px solid #c7c7c7;
+    margin: 0 auto;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 60px;
+    padding-right: 10px;
+    border-radius: 10px;
+    text-align: center;
+    display: inline-flex;
+} 
+
+p.carrier-email {
+    padding-top: 20px;
+}
+
+p.carrier-confirm-number {
+    padding-top: 50px;
+}   

@@ -2,29 +2,37 @@ class AppContainer  {
     constructor() {
       this.newBusinessForm = document.getElementById("createBusinessForm")
       
+           
     }
     static businesses = [];
-    static carriers = [];
+    static carriers = [];  
     url = "http://localhost:3000";
-    static appointment = {}
+   
+    
       
    
      // event listeners for click and submit events    
-     bindEventListeners() { 
-       this.newBusinessForm.addEventListener("submit", this.createBusiness.bind(this));
+     bindEventListeners() {
+            
+      const sortBtn = document.querySelector(".sort-by-alpha")
+      sortBtn.addEventListener("click", () => {
+        this.sortCarriers()
+      }) 
+     
+     const submitBtn = document.querySelector("button.search") 
+       submitBtn.addEventListener("click", (e) => {
+       e.preventDefault();
+        console.log(e)
+     })
 
-       //document.addEventListener("click", e => {
-       //          const deleteButton = document.querySelectorAll("button.deleteBusiness")
-       //  if (e.target == deleteButton) {
-       //      this.destroyBusiness(deleteButton.parentElement.dataset.id)
-       //      deleteButton.parentElement.remove()
-       //  }
-       //})
-     const carrierForms = document.querySelectorAll(".carrier-form")
+      
+      this.newBusinessForm.addEventListener("submit", this.createBusiness.bind(this));
+
+      const carrierForms = document.querySelectorAll(".carrier-form")
         
-        const addCarrierBtns = document.querySelectorAll("button.addCarrier")
+      const addCarrierBtns = document.querySelectorAll("button.addCarrier")
         
-        for(let x = 0; x < addCarrierBtns.length; x++) {
+      for(let x = 0; x < addCarrierBtns.length; x++) {
         
           addCarrierBtns[x].addEventListener("click", () => {
             
@@ -40,8 +48,17 @@ class AppContainer  {
            
          }
     }
+
+
+
+    
+     searchBar() {
+       const input = document.getElementById("searchBar")
+
+     }
         
-       
+    
+    
      
      //GET fetch request for businesses
     getBusinesses() {
@@ -114,12 +131,15 @@ class AppContainer  {
             addCarrier.setAttribute('class', "addCarrier")
             addCarrier.textContent = 'Add Carrier'
 
+            
           })
-           
+
+        
         })
       };
 
-    
+      
+          
     //POST request to create a new business    
     createBusiness(event) {
       event.preventDefault();
@@ -141,7 +161,9 @@ class AppContainer  {
       .then(data => data )
       .then(location.reload());
       }
-
+     
+     
+   
     //DELETE request for deleting a business
     //destroyBusiness(id) {
     //  fetch(`${this.url}/businesses/${id}`, {
@@ -151,49 +173,70 @@ class AppContainer  {
     //}
    
     //GET for carriers 
-   getCarriers(id) {
-      return fetch(`${this.url}/businesses/${id}/carriers`)
+   getCarriers() {
+      return fetch(`${this.url}/carriers`)
        .then(resp => resp.json())
        .catch(err => alert(err));
    }
 
-   rednerCarriers(){ 
+   renderCarriers(){ 
    ////create DOM nodes and insert data into them to render in the DOM
      this.getCarriers()
        .then(carriers => {
-
+        
         carriers.data.forEach(carrier => {
-         
-        const div = document.createElement('div')
-        const div1 = document.createElement('div')
-        const p = document.createElement('p')
-        const p1 = document.createElement('p')
-        const p2 = document.createElement('p') 
+          this.buildDomElementsFor(carrier);
+        })
+        
+      }); 
+   
+    }
 
 
-        const main = document.querySelector('main');
-        main.append(div)
-        div.append(div1)
-        div1.append(p, p1,p2)
-       
-
-        div.setAttribute('class', "carrier-card")
-        div.setAttribute('data-id', `${carrier.id}`)
-        div1.setAttribute('class', "carrier-card-body")
-        p.setAttribute('class', "carrier-name")
-        p.textContent = `Name: ${carrier.attributes.name}`
-        p1.setAttribute('class', "carrier-email")
-        p1.textContent = `Email: ${carrier.attributes.email}`
-        p2.setAttribute('class', "confirm-number")
-        p2.textContent = `Confirmation #: ${carrier.attributes.confirmation_number}`
+    buildDomElementsFor(carrier) {
+      const div = document.createElement('div')
+          const div1 = document.createElement('div')
+          const p = document.createElement('p')
+          const p1 = document.createElement('p')
+          const p2 = document.createElement('p')
           
 
-         }) 
+          const main = document.querySelector('main');
+          main.append(div)
+          div.append(div1)
+          div1.append(p, p1, p2,)
         
-       }); 
 
-         
+          div.setAttribute('class', "carrier-card")
+          div.setAttribute("data-name", carrier.attributes.name)
+          div.setAttribute('data-id', `${carrier.id}`)
+          div1.setAttribute('class', "carrier-card-body")
+          p.setAttribute('class', "carrier-name")
+          p.textContent = `Name: ${carrier.attributes.name}`
+          p1.setAttribute('class', "carrier-email")
+          p1.textContent = `Email: ${carrier.attributes.email}`
+          p2.setAttribute('class', "confirm-number")
+          p2.textContent = `Confirmation #: ${carrier.attributes.confirmation_number}`
+
+       }
+    
+  
+    sortCarriers() {
+      const carrCards = document.querySelectorAll("div[data-name]")
+      Array.from(carrCards).forEach(card => {
+        card.remove()
+      })
+      this.getCarriers()
+      .then(carriers => {
+        carriers.data.sort((a, b) => {
+          return a.attributes.name.localeCompare(b.attributes.name)
+        }).forEach(carrier => {
+          this.buildDomElementsFor(carrier)
+        })
+      })
     }
+
+    
 
 
    //POST request for creating a new carrier 
@@ -215,6 +258,5 @@ class AppContainer  {
      .then(data => data)
      .then(location.reload())
    }
-    
-  
+      
 }    

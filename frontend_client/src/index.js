@@ -1,6 +1,6 @@
 const app = new AppContainer();
 app.renderBusinesses();
-app.rednerCarriers();
+app.renderCarriers();
 setTimeout(() => {
     app.bindEventListeners();
 }, 3000)      
